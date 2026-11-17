@@ -19,7 +19,7 @@ export const BirthdayTodayMoment = ({ names }: BirthdayTodayMomentProps) => {
         {Array.from({ length: 14 }, (_, index) => (
           <span
             key={index}
-            className="birthday-confetti"
+            className="absolute -top-3 h-[13px] w-[7px] animate-birthday-confetti rounded-sm motion-reduce:animate-none"
             style={{
               left: `${4 + ((index * 37) % 92)}%`,
               animationDelay: `${(index % 7) * -0.55}s`,
@@ -38,7 +38,7 @@ export const BirthdayTodayMoment = ({ names }: BirthdayTodayMomentProps) => {
             {[24, 46, 68].map((left) => (
               <div key={left} className="absolute bottom-12 h-7 w-2 rounded-t bg-[#8f7bdc]" style={{ left }}>
                 <span
-                  className={`birthday-flame absolute -top-4 left-1/2 h-4 w-3 -translate-x-1/2 rounded-[50%_50%_45%_45%] bg-[#ff9f43] ${wishMade ? "birthday-flame-out" : ""}`}
+                  className={`absolute -top-4 left-1/2 h-4 w-3 origin-bottom rounded-[50%_50%_45%_45%] bg-[#ff9f43] transition-[opacity,transform] duration-200 motion-reduce:animate-none ${wishMade ? "animate-none opacity-0 [transform:translateX(-50%)_translateY(5px)_scale(0.2)]" : "animate-birthday-flame"}`}
                 />
               </div>
             ))}

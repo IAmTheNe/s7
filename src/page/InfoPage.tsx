@@ -9,10 +9,10 @@ export const InfoPage = () => {
 
   if (!person) {
     return (
-      <main className="memory-paper grid min-h-screen place-items-center bg-[#fffaf0] px-5 text-center text-[#332f3a]">
+      <main className="grid min-h-screen place-items-center bg-[#fffaf0] bg-[radial-gradient(circle_at_1px_1px,rgba(51,47,58,0.075)_1px,transparent_0)] bg-[length:23px_23px] px-5 text-center text-[#332f3a]">
         <div>
           <p className="text-6xl">☹</p>
-          <h1 className="font-display mt-5 text-4xl font-black">Person not found</h1>
+          <h1 className="mt-5 font-serif text-4xl font-black">Person not found</h1>
           <Link to="/" className="mt-6 inline-block font-bold underline decoration-2 underline-offset-4">
             Back to the birthday book
           </Link>
@@ -26,7 +26,7 @@ export const InfoPage = () => {
   const isSoon = personView.remaining > 0 && personView.remaining <= 7;
   const pageTheme = isToday
     ? {
-        page: "birthday-today-hero bg-[#fff4cf]",
+        page: "bg-[#fff4cf] bg-[radial-gradient(circle_at_15%_18%,rgba(255,111,97,0.16)_0_3px,transparent_4px),radial-gradient(circle_at_82%_28%,rgba(143,123,220,0.16)_0_3px,transparent_4px)] bg-[length:38px_38px,52px_52px]",
         badge: "bg-[#ffcf5c]",
         badgeText: "Birthday today",
         tape: "bg-[#ffcf5c]/80",
@@ -60,7 +60,7 @@ export const InfoPage = () => {
       : "One of the lovely people who makes S7 feel like S7. Here is a small page to remember the date and celebrate together.";
 
   return (
-    <main className={`memory-paper min-h-screen overflow-hidden px-5 py-7 text-[#332f3a] sm:px-8 sm:py-10 ${pageTheme.page}`}>
+    <main className={`min-h-screen overflow-hidden bg-[radial-gradient(circle_at_1px_1px,rgba(51,47,58,0.075)_1px,transparent_0)] bg-[length:23px_23px] px-5 py-7 text-[#332f3a] sm:px-8 sm:py-10 ${pageTheme.page}`}>
       <div className="mx-auto max-w-5xl">
         <nav className="flex items-center justify-between">
           <Link
@@ -69,7 +69,7 @@ export const InfoPage = () => {
           >
             ← Birthday book
           </Link>
-          <span className="font-display text-2xl font-black">S7<span className="text-[#ff6f61]">.</span></span>
+          <span className="font-serif text-2xl font-black">S7<span className="text-[#ff6f61]">.</span></span>
         </nav>
 
         <section className="mt-14 grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
@@ -81,7 +81,7 @@ export const InfoPage = () => {
                 alt={personView.name}
                 className="aspect-[4/5] w-full border-2 border-[#332f3a] object-cover"
               />
-              <p className="font-display absolute bottom-6 left-0 w-full rotate-1 text-center text-3xl font-black">
+              <p className="absolute bottom-6 left-0 w-full rotate-1 text-center font-serif text-3xl font-black">
                 {personView.name} ♡
               </p>
               {isToday && (
@@ -101,7 +101,7 @@ export const InfoPage = () => {
             <span className={`inline-block -rotate-1 rounded-full border-2 border-[#332f3a] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] ${pageTheme.badge}`}>
               {pageTheme.badgeText}
             </span>
-            <h1 className="font-display mt-6 text-6xl font-black leading-none tracking-[-0.05em] sm:text-7xl">
+            <h1 className="mt-6 font-serif text-6xl font-black leading-none tracking-[-0.05em] sm:text-7xl">
               {heading} <span className="text-[#ff6f61]">{personView.name}</span>
               {isToday && <span className="text-[#332f3a]">!</span>}
             </h1>
@@ -113,7 +113,7 @@ export const InfoPage = () => {
 
             {isSoon && (
               <div className="mt-8 flex items-center gap-4 rounded-[1.5rem] border-2 border-[#332f3a] bg-white/75 p-5 shadow-[5px_6px_0_#f3c7b3]">
-                <span className="font-display text-6xl font-black leading-none text-[#ff6f61]">
+                <span className="font-serif text-6xl font-black leading-none text-[#ff6f61]">
                   {personView.remaining}
                 </span>
                 <div>
@@ -130,13 +130,13 @@ export const InfoPage = () => {
             <div className="mt-9 grid gap-4 sm:grid-cols-2">
               <div className="rotate-1 border-2 border-[#332f3a] bg-[#ebf7f3] p-5 shadow-[5px_6px_0_#c5e2d9]">
                 <p className="text-xs font-black uppercase tracking-[0.16em] text-[#367d68]">The date</p>
-                <p className="font-display mt-2 text-3xl font-black">{personView.displayDob}</p>
+                <p className="mt-2 font-serif text-3xl font-black">{personView.displayDob}</p>
               </div>
               <div className="-rotate-1 border-2 border-[#332f3a] bg-[#fff0e9] p-5 shadow-[5px_6px_0_#f3c7b3]">
                 <p className="text-xs font-black uppercase tracking-[0.16em] text-[#c94e2d]">
                   {isToday ? "Celebrating" : isSoon ? "Coming soon" : "Countdown"}
                 </p>
-                <p className="font-display mt-2 text-3xl font-black">
+                <p className="mt-2 font-serif text-3xl font-black">
                   {isToday ? "Right now!" : `${personView.remaining} days`}
                 </p>
               </div>

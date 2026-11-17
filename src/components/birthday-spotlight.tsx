@@ -62,7 +62,7 @@ const SingleSpotlight = ({ person }: { person: PersonView }) => {
   const isToday = person.remaining === 0;
 
   return (
-    <section className={`relative mt-12 grid items-center gap-10 rounded-[2.25rem] border-2 border-[#332f3a] px-6 py-9 shadow-[8px_9px_0_#332f3a] md:grid-cols-[1.08fr_0.92fr] md:px-12 md:py-12 ${isToday ? "birthday-today-hero bg-[#fff4cf]" : "bg-[#f1eaff]"}`}>
+    <section className={`relative mt-12 grid items-center gap-10 rounded-[2.25rem] border-2 border-[#332f3a] px-6 py-9 shadow-[8px_9px_0_#332f3a] md:grid-cols-[1.08fr_0.92fr] md:px-12 md:py-12 ${isToday ? "bg-[#fff4cf] bg-[radial-gradient(circle_at_15%_18%,rgba(255,111,97,0.16)_0_3px,transparent_4px),radial-gradient(circle_at_82%_28%,rgba(143,123,220,0.16)_0_3px,transparent_4px)] bg-[length:38px_38px,52px_52px]" : "bg-[#f1eaff]"}`}>
       <FlowerDoodle className="pointer-events-none absolute -right-2 bottom-2 h-28 w-24 rotate-12 text-[#8f7bdc] opacity-80 sm:right-5 sm:top-8 sm:h-32 sm:w-28" />
       <FlowerDoodle className="pointer-events-none absolute -left-3 bottom-3 h-16 w-14 -rotate-12 text-[#ff6f61] opacity-45" />
       <span className="absolute -top-4 left-8 -rotate-2 border-2 border-[#332f3a] bg-[#ff8a65] px-4 py-1.5 text-xs font-black uppercase tracking-[0.16em] text-white">
@@ -73,7 +73,7 @@ const SingleSpotlight = ({ person }: { person: PersonView }) => {
         <p className="mb-3 text-sm font-black uppercase tracking-[0.22em] text-[#715ac1]">
           {isToday ? "The special day is here" : "Save the date"}
         </p>
-        <h1 className="font-display max-w-xl text-5xl font-black leading-[0.94] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+        <h1 className="max-w-xl font-serif text-5xl font-black leading-[0.94] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
           {isToday ? "Today is" : "Counting down to"}{" "}
           <span className="relative inline-block text-[#ff6f61]">
             {person.name}
@@ -119,7 +119,7 @@ const SingleSpotlight = ({ person }: { person: PersonView }) => {
             alt={person.name}
             className="aspect-[4/3] w-full border-2 border-[#332f3a] object-cover"
           />
-          <p className="font-display absolute bottom-4 left-0 w-full -rotate-2 text-center text-2xl font-black">
+          <p className="absolute bottom-4 left-0 w-full -rotate-2 text-center font-serif text-2xl font-black">
             {person.name} · {person.displayDob} ♡
           </p>
         </div>
@@ -137,7 +137,7 @@ const GroupSpotlight = ({ people }: BirthdaySpotlightProps) => {
   }).format(people.map((person) => person.name));
 
   return (
-    <section className={`relative mt-12 overflow-hidden rounded-[2.25rem] border-2 border-[#332f3a] px-6 py-10 shadow-[8px_9px_0_#332f3a] md:px-12 md:py-12 ${isToday ? "birthday-today-hero bg-[#fff4cf]" : "bg-[#fff0e9]"}`}>
+    <section className={`relative mt-12 overflow-hidden rounded-[2.25rem] border-2 border-[#332f3a] px-6 py-10 shadow-[8px_9px_0_#332f3a] md:px-12 md:py-12 ${isToday ? "bg-[#fff4cf] bg-[radial-gradient(circle_at_15%_18%,rgba(255,111,97,0.16)_0_3px,transparent_4px),radial-gradient(circle_at_82%_28%,rgba(143,123,220,0.16)_0_3px,transparent_4px)] bg-[length:38px_38px,52px_52px]" : "bg-[#fff0e9]"}`}>
       <div className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full border-[28px] border-[#ffcf5c]/35" />
       <FlowerDoodle className="pointer-events-none absolute -bottom-3 right-2 h-32 w-28 -rotate-6 text-[#ff6f61] opacity-70 sm:right-8" />
       <FlowerDoodle className="pointer-events-none absolute -left-2 top-6 h-20 w-16 rotate-12 text-[#8f7bdc] opacity-40" />
@@ -150,7 +150,7 @@ const GroupSpotlight = ({ people }: BirthdaySpotlightProps) => {
           <p className="mb-3 text-sm font-black uppercase tracking-[0.22em] text-[#c94e2d]">
             {isToday ? "One date · one big celebration" : "Same date · more love"}
           </p>
-          <h1 className="font-display text-5xl font-black leading-[0.94] tracking-[-0.045em] sm:text-6xl">
+          <h1 className="font-serif text-5xl font-black leading-[0.94] tracking-[-0.045em] sm:text-6xl">
             A shared day for{" "}
             <span className="text-[#ff6f61]">{names}</span>
           </h1>
@@ -191,7 +191,7 @@ const GroupSpotlight = ({ people }: BirthdaySpotlightProps) => {
                 alt={person.name}
                 className="aspect-square w-full border border-[#332f3a] object-cover"
               />
-              <span className="font-display absolute bottom-2 left-0 w-full text-center text-lg font-black">
+              <span className="absolute bottom-2 left-0 w-full text-center font-serif text-lg font-black">
                 {person.name} ♡
               </span>
             </Link>

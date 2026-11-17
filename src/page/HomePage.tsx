@@ -18,13 +18,13 @@ export const HomePage = () => {
     .map(toPersonView);
 
   return (
-    <main className="memory-paper relative min-h-screen overflow-hidden bg-[#fffaf0] px-5 py-7 text-[#332f3a] sm:px-8 sm:py-10">
+    <main className="relative min-h-screen overflow-hidden bg-[#fffaf0] bg-[radial-gradient(circle_at_1px_1px,rgba(51,47,58,0.075)_1px,transparent_0)] bg-[length:23px_23px] px-5 py-7 text-[#332f3a] sm:px-8 sm:py-10">
       <div className="pointer-events-none absolute left-[7%] top-28 h-20 w-20 rotate-12 rounded-full border-[12px] border-[#ff8a65]/15" />
       <div className="pointer-events-none absolute right-[6%] top-[42rem] text-6xl opacity-10">✿</div>
 
       <div className="relative mx-auto max-w-6xl">
         <header className="flex items-center justify-between gap-4">
-          <Link to="/" className="font-display text-2xl font-black tracking-tight sm:text-3xl">
+          <Link to="/" className="font-serif text-2xl font-black tracking-tight sm:text-3xl">
             S7<span className="text-[#ff6f61]">.</span>
           </Link>
           <span className="rotate-1 rounded-full border-2 border-[#332f3a] bg-[#ffcf5c] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] shadow-[3px_3px_0_#332f3a]">
@@ -40,7 +40,7 @@ export const HomePage = () => {
               <p className="mb-2 text-xs font-black uppercase tracking-[0.22em] text-[#ff6f61]">
                 The rest of our little crew
               </p>
-              <h2 id="birthday-list-title" className="font-display text-4xl font-black tracking-tight sm:text-5xl">
+              <h2 id="birthday-list-title" className="font-serif text-4xl font-black tracking-tight sm:text-5xl">
                 Birthday book <span aria-hidden="true">✿</span>
               </h2>
             </div>
@@ -53,7 +53,7 @@ export const HomePage = () => {
             {others.map((person, index) => (
               <div
                 key={person.id}
-                className="reveal-card"
+                className="animate-reveal-card motion-reduce:animate-none"
                 style={{ animationDelay: `${index * 70}ms` }}
               >
                 <PersonCard {...person} />

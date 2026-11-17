@@ -1,75 +1,73 @@
+import { BirthdaySpotlight } from "@/components/birthday-spotlight";
 import { PersonCard } from "@/components/person-card";
 import { people } from "@/data/people";
 import { getNextBirthDay, toPersonView } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 export const HomePage = () => {
-  const others = [...people].sort((a, b) => {
-    const dateA = getNextBirthDay(a.dob);
-    const dateB = getNextBirthDay(b.dob);
-    return dateA.getTime() - dateB.getTime();
-  });
-
-  const sortedPeople = [
-    ...others.filter((p) => p.id !== "nhom"),
-    ...people.filter((p) => p.id === "nhom"),
-  ];
+  const sortedPeople = [...people].sort(
+    (a, b) => getNextBirthDay(a.dob).getTime() - getNextBirthDay(b.dob).getTime(),
+  );
+  const nextBirthdayTime = getNextBirthDay(sortedPeople[0].dob).getTime();
+  const featuredPeople = sortedPeople
+    .filter((person) => getNextBirthDay(person.dob).getTime() === nextBirthdayTime)
+    .map(toPersonView);
+  const featuredIds = new Set(featuredPeople.map((person) => person.id));
+  const others = sortedPeople
+    .filter((person) => !featuredIds.has(person.id))
+    .map(toPersonView);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#faf7ff] px-5 py-12 sm:px-8">
-      {/* Background decorations */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute -left-40 -top-40 h-96 w-96 rounded-full bg-pink-200/40 blur-[100px]" />
-        <div className="absolute -right-40 top-1/4 h-96 w-96 rounded-full bg-purple-200/40 blur-[100px]" />
-        <div className="absolute -bottom-40 left-1/3 h-96 w-96 rounded-full bg-blue-200/40 blur-[100px]" />
-      </div>
+    <main className="memory-paper relative min-h-screen overflow-hidden bg-[#fffaf0] px-5 py-7 text-[#332f3a] sm:px-8 sm:py-10">
+      <div className="pointer-events-none absolute left-[7%] top-28 h-20 w-20 rotate-12 rounded-full border-[12px] border-[#ff8a65]/15" />
+      <div className="pointer-events-none absolute right-[6%] top-[42rem] text-6xl opacity-10">✿</div>
 
-      <div className="relative mx-auto max-w-7xl">
-        {/* Hero */}
-        <header className="mb-4 text-center">
-          <h1 className="text-2xl font-black tracking-tight text-gray-800 sm:text-5xl md:text-6xl">
-            S7 Birthday
-          </h1>
+      <div className="relative mx-auto max-w-6xl">
+        <header className="flex items-center justify-between gap-4">
+          <Link to="/" className="font-display text-2xl font-black tracking-tight sm:text-3xl">
+            S7<span className="text-[#ff6f61]">.</span>
+          </Link>
+          <span className="rotate-1 rounded-full border-2 border-[#332f3a] bg-[#ffcf5c] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] shadow-[3px_3px_0_#332f3a]">
+            Birthday club
+          </span>
         </header>
 
-        {/* Section heading */}
-        <section>
-          <div className="mb-7 flex flex-wrap items-end justify-between gap-3">
+        <BirthdaySpotlight people={featuredPeople} />
+
+        {others.length > 0 && <section className="mt-24" aria-labelledby="birthday-list-title">
+          <div className="mb-9 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
             <div>
-              <p className="mb-1 text-xs font-bold uppercase tracking-[0.2em] text-pink-400">
-                Never miss a special day
+              <p className="mb-2 text-xs font-black uppercase tracking-[0.22em] text-[#ff6f61]">
+                The rest of our little crew
               </p>
-              <h2 className="text-2xl font-extrabold text-gray-800">
-                Our lovely people
-                <span className="ml-2 text-xl">🌷</span>
+              <h2 id="birthday-list-title" className="font-display text-4xl font-black tracking-tight sm:text-5xl">
+                Birthday book <span aria-hidden="true">✿</span>
               </h2>
             </div>
-
-            <span className="text-xs font-medium text-gray-400">
-              Sorted by upcoming birthdays ↑
-            </span>
+            <p className="max-w-xs text-sm font-semibold leading-6 text-[#716a78] sm:text-right">
+              Ordered by the birthdays coming up next.
+            </p>
           </div>
 
-          {/* Cards */}
-          <div className="grid grid-cols-1 justify-items-center gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {sortedPeople.map(toPersonView).map((person, index) => (
+          <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+            {others.map((person, index) => (
               <div
                 key={person.id}
-                className="w-full flex justify-center"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="reveal-card"
+                style={{ animationDelay: `${index * 70}ms` }}
               >
                 <PersonCard {...person} />
               </div>
             ))}
           </div>
-        </section>
+        </section>}
 
-        {/* Footer */}
-        <footer className="mt-20 pb-6 text-center">
-          <div className="mb-3 text-2xl">💗</div>
-          <p className="text-sm font-medium text-gray-400">
+        <footer className="mt-24 border-t-2 border-dashed border-[#332f3a]/25 pb-8 pt-12 text-center">
+          <div className="mb-3 text-3xl">💗</div>
+          <p className="text-sm font-bold text-[#716a78]">
             Made with love, for the people who matter.
           </p>
-          <p className="mt-2 text-xs text-gray-300">
+          <p className="mt-2 text-xs font-semibold text-[#9a929f]">
             Every moment with you is worth celebrating.
           </p>
         </footer>

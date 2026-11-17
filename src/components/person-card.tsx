@@ -1,107 +1,96 @@
 import { cn } from "@/lib/utils";
 import type { PersonView } from "@/type/person";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+const palettes = [
+  {
+    card: "bg-[#fff7ea]",
+    accent: "bg-[#ff8a65]",
+    text: "text-[#c94e2d]",
+    shadow: "shadow-[5px_6px_0_#f3c7b3]",
+  },
+  {
+    card: "bg-[#f2edff]",
+    accent: "bg-[#8f7bdc]",
+    text: "text-[#6651b8]",
+    shadow: "shadow-[5px_6px_0_#d8cff3]",
+  },
+  {
+    card: "bg-[#ebf7f3]",
+    accent: "bg-[#58a98f]",
+    text: "text-[#367d68]",
+    shadow: "shadow-[5px_6px_0_#c5e2d9]",
+  },
+] as const;
 
 export const PersonCard = ({ id, displayDob, name, remaining }: PersonView) => {
-  const navigate = useNavigate();
-
   const isToday = remaining === 0;
   const isSoon = remaining > 0 && remaining <= 7;
+  const palette = palettes[id.length % palettes.length];
 
   return (
-    <div
-      onClick={() => navigate(`/info/${id}`)}
+    <Link
+      to={`/info/${id}`}
+      aria-label={`Open ${name}'s birthday page`}
       className={cn(
-        "group relative w-full max-w-[220px] cursor-pointer",
-        "rounded-3xl border border-white/70",
-        "bg-white/70 backdrop-blur-xl",
-        "shadow-[0_8px_30px_rgba(120,80,150,0.08)]",
-        "transition-all duration-500 ease-out",
-        "hover:-translate-y-3 hover:scale-[1.03]",
-        "hover:shadow-[0_20px_45px_rgba(120,80,150,0.2)]",
-        "animate-[float_4s_ease-in-out_infinite]",
+        "group relative block w-full overflow-hidden rounded-[1.75rem] border-2 border-[#332f3a] p-5",
+        "transition duration-300 ease-out hover:-translate-y-1.5 hover:-rotate-1 hover:shadow-[8px_9px_0_#332f3a]",
+        "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#ffcf5c]",
+        palette.card,
+        palette.shadow,
       )}
     >
-      {/* Decorative glow */}
-      <div className="absolute inset-0 overflow-hidden rounded-3xl">
-        <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-pink-200/40 blur-3xl transition-all duration-500 group-hover:bg-pink-300/60" />
-        <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-violet-200/40 blur-3xl" />
-      </div>
+      <div
+        className={cn(
+          "absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-20",
+          palette.accent,
+        )}
+      />
 
-      <div className="relative flex flex-col items-center p-5">
-        {/* Status */}
-        <div className="mb-4 h-6">
-          {isToday ? (
-            <span className="rounded-full bg-gradient-to-r from-pink-500 to-rose-500 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-md shadow-pink-200">
-              🎉 Birthday Today!
-            </span>
-          ) : isSoon ? (
-            <span className="rounded-full bg-amber-100 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-amber-600">
-              ✨ Coming soon
-            </span>
-          ) : (
-            <span className="text-xs font-medium text-violet-400">
-              ♡ Special person
-            </span>
-          )}
-        </div>
-
-        {/* Avatar */}
-        <div className="relative mb-4">
-          <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-pink-300 via-purple-300 to-blue-300 opacity-70 blur-sm transition-opacity group-hover:opacity-100" />
-
-          <div className="relative rounded-full bg-gradient-to-br from-pink-300 via-purple-300 to-blue-300 p-[3px]">
-            <img
-              className="h-20 w-20 rounded-full border-[3px] border-white object-cover transition-transform duration-500 group-hover:scale-105"
-              src={`/${id}.jpeg`}
-              alt={name}
-            />
-          </div>
-
-          <span className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-white text-sm shadow-sm">
+      <div className="relative flex items-start gap-4">
+        <div className="relative shrink-0">
+          <div className="absolute -inset-1 rotate-3 rounded-[1.35rem] bg-white" />
+          <img
+            className="relative h-20 w-20 -rotate-2 rounded-[1.15rem] border-2 border-[#332f3a] object-cover transition-transform duration-300 group-hover:rotate-1 group-hover:scale-105"
+            src={`/${id}.jpeg`}
+            alt={name}
+          />
+          <span className="absolute -bottom-2 -right-2 grid h-8 w-8 rotate-6 place-items-center rounded-full border-2 border-[#332f3a] bg-[#ffcf5c] text-sm">
             🎂
           </span>
         </div>
 
-        {/* Name */}
-        <h2 className="text-lg font-bold tracking-tight text-gray-800 transition-colors group-hover:text-purple-600">
-          {name}
-        </h2>
-
-        {/* Birthday */}
-        <p className="mt-1 text-sm font-medium text-gray-400">{displayDob}</p>
-
-        {/* Divider */}
-        <div className="my-4 h-px w-full bg-gradient-to-r from-transparent via-purple-200 to-transparent" />
-
-        {/* Countdown */}
-        <div className="flex flex-col items-center">
-          <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400">
-            {isToday ? "Celebrate!" : "Birthday in"}
-          </span>
-
-          <div className="mt-1 flex items-baseline gap-1">
-            <span
-              className={cn(
-                "text-3xl font-black tracking-tight",
-                isToday
-                  ? "bg-gradient-to-r from-pink-500 to-orange-400 bg-clip-text text-transparent"
-                  : "text-purple-600",
-              )}
-            >
-              {remaining}
-            </span>
-            <span className="text-xs font-semibold text-gray-400">
-              {remaining === 1 ? "day" : "days"}
-            </span>
-          </div>
-        </div>
-
-        {/* Hover hint */}
-        <div className="mt-3 text-xs font-semibold text-purple-400 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-          View memories →
+        <div className="min-w-0 flex-1 pt-1">
+          <p
+            className={cn(
+              "mb-1 text-[11px] font-extrabold uppercase tracking-[0.14em]",
+              palette.text,
+            )}
+          >
+            {isToday ? "Birthday today!" : isSoon ? "Coming very soon" : "S7 lovely person"}
+          </p>
+          <h3 className="truncate text-xl font-black tracking-tight text-[#332f3a]">
+            {name}
+          </h3>
+          <p className="mt-1 text-sm font-semibold text-[#716a78]">{displayDob}</p>
         </div>
       </div>
-    </div>
+
+      <div className="relative mt-5 flex items-end justify-between border-t-2 border-dashed border-[#332f3a]/20 pt-4">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-wider text-[#716a78]">
+            {isToday ? "Make a wish" : "Birthday in"}
+          </p>
+          <p className={cn("mt-0.5 font-black", palette.text)}>
+            <span className="text-3xl">{remaining}</span>
+            <span className="ml-1 text-sm">{remaining === 1 ? "day" : "days"}</span>
+          </p>
+        </div>
+
+        <span className="mb-1 text-sm font-extrabold text-[#332f3a] underline decoration-2 underline-offset-4 transition-transform group-hover:translate-x-1">
+          Open page →
+        </span>
+      </div>
+    </Link>
   );
 };

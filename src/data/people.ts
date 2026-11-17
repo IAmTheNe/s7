@@ -8,7 +8,7 @@ export const people: Person[] = [
   { id: "dbt", name: "Dbt", dob: "2003-06-19" },
   { id: "huong", name: "Hương", dob: "2003-10-22" },
   { id: "the", name: "Thế", dob: "2003-10-23" },
-  { id: "tuong", name: "Tường", dob: "2026-12-03" },
-  { id: "luan", name: "Luân", dob: "2026-12-08" },
-  { id: "hung", name: "Hưng", dob: "2026-23-05" },
+  { id: "tuong", name: "Tường", dob: "2003-12-03" },
+  { id: "luan", name: "Luân", dob: "2003-12-08" },
+  { id: "hung", name: "Hưng", dob: "2003-05-23" },
 ];

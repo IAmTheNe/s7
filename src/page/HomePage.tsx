@@ -14,16 +14,6 @@ export const HomePage = () => {
     ...people.filter((p) => p.id === "nhom"),
   ];
 
-  const todayCount = others.filter(
-    (p) =>
-      getNextBirthDay(p.dob).getTime() ===
-      new Date(
-        new Date().getFullYear(),
-        new Date().getMonth(),
-        new Date().getDate(),
-      ).getTime(),
-  ).length;
-
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#faf7ff] px-5 py-12 sm:px-8">
       {/* Background decorations */}
